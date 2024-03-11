@@ -7,7 +7,7 @@ export async function ValidateAdminToken(
   res: Response,
   next: NextFunction
 ) {
-  const tokenUser = req.header(String(process.env.VALIDATION_HEADER));
+  const tokenUser = req.header(String(process.env.VALIDATION_HEADER) || "R223_FRNXUSE20");
   if (!tokenUser)
     return res.status(401).json({ message: "Token not provided" });
 
@@ -17,7 +17,7 @@ export async function ValidateAdminToken(
       process.env.SECRET_KEY_JWT || ""
     );
     if (Decoded.datos.Role.nombre === "Administrador") return next();
-    throw new Error("Invalid credentials required");
+   
   } catch (error) {
     console.log(error);
     return res.status(401).json({ message: "Acceso denegado. No tienes el rol requerido para esta acción." });

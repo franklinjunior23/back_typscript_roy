@@ -7,7 +7,7 @@ export async function ValidateUser(
   res: Response,
   next: NextFunction
 ) {
-  const tokenUser = req.header(String(process.env.VALIDATION_HEADER));
+  const tokenUser = req.header(String(process.env.VALIDATION_HEADER)|| 'R223_FRNXUSE20');
   if (!tokenUser)
     return res.status(401).json({ message: "Token not provided" });
 
