@@ -14,10 +14,12 @@ export async function ValidateAdminToken(
   try {
     const Decoded: any = await jwt.verify(
       tokenUser,
-      process.env.SECRET_KEY_JWT || ""
+      String(process.env.SECRET_KEY_JWT) || ""
     );
+   
     if (Decoded.datos.Role.nombre === "Administrador") return next();
    
+    return res.status(401).json({ message: "Acceso denegado. No tienes el rol requerido para esta acción." });
   } catch (error) {
     console.log(error);
     return res.status(401).json({ message: "Acceso denegado. No tienes el rol requerido para esta acción." });

@@ -4,7 +4,7 @@ services:
   mysqldb:
     image: mysql:8.3.0
     restart: always
-    container_name: mydb
+    container_name: DBRoyIntisoft
     environment:
       - MYSQL_ROOT_PASSWORD=1234567
       - MYSQL_DATABASE=inventory_it
